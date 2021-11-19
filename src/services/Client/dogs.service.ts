@@ -1,34 +1,21 @@
 import { Injectable } from "@nestjs/common";
 import Axios from "axios";
-import { map, Observable } from "rxjs";
+import { DogAdapter } from "../Adapters/dog.adapter";
 import {DogBreed} from './dog.interface'
-import { HttpService } from "@nestjs/axios";
-
+import { DogODto } from "../../core/DTO/Dog.output.dto";
 
 @Injectable()
 export class DogsService{
-    constructor(private readonly http: HttpService){}
-    async call():Promise<DogBreed>{
+    constructor(private dogAdapter: DogAdapter){}
+    async apiCall():Promise<DogODto[]>{
         const {data}: {data: DogBreed}  = await  Axios.get('https://dog.ceo/api/breeds/list/all', {
             headers:{
                 'Accept':'application/json'
             }
         })
         console.log(data)
-        return data
-
+        return this.dogAdapter.adaptDogs(data)
+        
     }
 }
 
-
-// Logic for the controller in case of not having a dogsService
-// root(): Observable<AxiosResponse<Dog[]>> {
-//     return this.http.get('https://dog.ceo/api/breeds/list/all', {
-//         headers:{
-//             'Accept': 'application/json'
-//         }
-//     }).pipe(
-//         map(response => response.data)
-//     )
-    
-// }

@@ -1,4 +1,6 @@
 export interface DogBreed{
-    asd:[],
+    message:{
+        [key: string]: string[]
+    },
     status: string,
 }
