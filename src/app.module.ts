@@ -7,10 +7,11 @@ import { DogsService } from "./services/Client/dogs.service";
 import { DogAdapter } from "./services/Adapters/dog.adapter";
 import { GetBreedList } from './core/Use_cases/getBreedList';
 import { DogClient } from './services/Client/dog.client';
+import { ConfigModule } from "@nestjs/config";
 
 
 @Module({
-  imports: [ HttpModule],
+  imports: [ HttpModule, ConfigModule.forRoot()],
   controllers: [AppController, DogsController],
   providers: [AppService, DogsService, DogAdapter, GetBreedList, DogClient],
 })
