@@ -5,14 +5,14 @@ export class DogODto{
         description: 'Dog Breed Name',
         example: 'african'
     })
-    breed:string;
+    breeds:string[];
 
     @ApiProperty({
         description: 'Dog Breed Variations',
         example: ['boston', 'english'],
         type: 'array'
     })
-    variations:string[];
+    total:number;
 
     // method for adapting Entity to DTO
 
